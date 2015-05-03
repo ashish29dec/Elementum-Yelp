@@ -2,24 +2,18 @@ package com.elementum.yelp.search.activity;
 
 import java.util.ArrayList;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroupOverlay;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -209,8 +203,8 @@ public class MainActivity extends FragmentActivity {
 
 		@Override
 		protected void onPostExecute(Response result) {
+			requestInProgress = false;
 			if (isFinishing() || isCancelled()) {
-				requestInProgress = false;
 				return;
 			}
 			if (result == null) {
@@ -219,7 +213,6 @@ public class MainActivity extends FragmentActivity {
 						Toast.LENGTH_LONG).show();
 				setLoading(false);
 			} else {
-				requestInProgress = false;
 				setResult(result);
 				onResponse();
 			}
